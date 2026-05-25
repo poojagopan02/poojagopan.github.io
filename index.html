@@ -6,15 +6,24 @@
     <title>Pooja Gopan | Software Engineer</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Modern CSS Variables for easy theme changing */
+        /* Modern CSS Variables */
         :root {
-            --primary-color: #4f46e5; /* Indigo */
+            --primary-color: #4f46e5;
             --primary-hover: #4338ca;
-            --bg-color: #f8fafc; /* Very light slate */
+            --bg-color: #f8fafc;
             --text-main: #0f172a;
             --text-muted: #64748b;
             --card-bg: #ffffff;
             --transition: all 0.3s ease;
+        }
+
+        /* --- Custom Cursor Hide Default --- */
+        body {
+            cursor: none; /* Hides the default cursor */
+        }
+        /* Ensure links also hide default cursor */
+        a, button, input, textarea, select {
+            cursor: none;
         }
 
         * {
@@ -28,6 +37,40 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* --- Custom Cursor Styling --- */
+        .cursor-dot,
+        .cursor-outline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--primary-color);
+        }
+
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 2px solid rgba(79, 70, 229, 0.5);
+            transition: width 0.2s ease-out, height 0.2s ease-out, background-color 0.2s ease-out;
+        }
+
+        /* Hover state for cursor */
+        .cursor-hover {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(79, 70, 229, 0.1);
+            border-color: transparent;
         }
 
         /* Navigation */
@@ -35,8 +78,8 @@
             display: flex;
             justify-content: center;
             padding: 1.5rem;
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
             position: fixed;
             width: 100%;
             top: 0;
@@ -63,7 +106,7 @@
             padding: 0 2rem;
         }
 
-        /* Hero Section */
+        /* --- Hero Section with Animated Background --- */
         .hero {
             display: flex;
             align-items: center;
@@ -71,10 +114,21 @@
             min-height: 100vh;
             padding-top: 60px;
             gap: 2rem;
+            /* Professional Subtle Animated Gradient */
+            background: linear-gradient(-45deg, #f8fafc, #e0e7ff, #f1f5f9, #c7d2fe);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .hero-content {
             flex: 1;
+            padding-left: 2rem;
         }
 
         .hero h1 {
@@ -82,6 +136,7 @@
             font-weight: 700;
             margin-bottom: 0.5rem;
             color: var(--text-main);
+            letter-spacing: -1px;
         }
 
         .hero h2 {
@@ -94,8 +149,26 @@
         .hero p {
             font-size: 1.1rem;
             color: var(--text-muted);
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
             max-width: 600px;
+        }
+
+        .btn {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.9rem 2.5rem;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            display: inline-block;
+            transition: var(--transition);
+            box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.3);
+        }
+
+        .btn:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.4);
         }
 
         /* Image Styling */
@@ -106,29 +179,30 @@
         }
 
         .hero-image {
-            width: 300px;
-            height: 300px;
+            width: 320px;
+            height: 320px;
             border-radius: 50%;
             object-fit: cover;
             border: 8px solid white;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
             transition: var(--transition);
         }
 
         .hero-image:hover {
-            transform: translateY(-10px);
+            transform: translateY(-10px) scale(1.02);
         }
 
         /* Section Styling */
         section {
-            padding: 5rem 0;
+            padding: 6rem 0;
         }
 
         .section-title {
             font-size: 2.5rem;
-            margin-bottom: 3rem;
+            margin-bottom: 3.5rem;
             text-align: center;
             color: var(--text-main);
+            font-weight: 700;
         }
 
         /* Skills Pills */
@@ -137,12 +211,14 @@
             flex-wrap: wrap;
             gap: 1rem;
             justify-content: center;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
         .skill-pill {
             background-color: white;
             color: var(--primary-color);
-            padding: 0.75rem 1.5rem;
+            padding: 0.75rem 1.75rem;
             border-radius: 50px;
             font-weight: 600;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
@@ -152,21 +228,21 @@
 
         .skill-pill:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.2);
             background-color: var(--primary-color);
             color: white;
         }
 
-        /* Card Grid Layout for Projects & Experience */
+        /* General Card Grid Layout */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
         }
 
         .card {
             background: var(--card-bg);
-            padding: 2rem;
+            padding: 2.5rem;
             border-radius: 16px;
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
             transition: var(--transition);
@@ -174,24 +250,52 @@
         }
 
         .card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
         }
 
-        .card h3 {
-            font-size: 1.25rem;
+        /* --- Custom Project Cards with Images --- */
+        .project-card {
+            padding: 0; /* Remove padding to let image reach edges */
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-bottom: 1px solid #f1f5f9;
+            transition: var(--transition);
+        }
+
+        .project-card:hover .project-img {
+            transform: scale(1.05);
+        }
+
+        .project-content {
+            padding: 2rem;
+            background: white;
+            flex-grow: 1;
+            z-index: 1; /* Keeps content above scaled image */
+        }
+
+        .card h3, .project-content h3 {
+            font-size: 1.35rem;
             margin-bottom: 0.5rem;
             color: var(--text-main);
         }
 
-        .card .meta {
+        .card .meta, .project-content .meta {
             color: var(--primary-color);
             font-weight: 600;
             font-size: 0.9rem;
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
+            display: block;
         }
 
-        .card p {
+        .card p, .project-content p {
             color: var(--text-muted);
             font-size: 0.95rem;
         }
@@ -201,7 +305,7 @@
             background: var(--text-main);
             color: white;
             text-align: center;
-            padding: 3rem 0;
+            padding: 4rem 0;
             margin-top: 4rem;
         }
 
@@ -209,18 +313,22 @@
             display: flex;
             justify-content: center;
             gap: 2rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .contact-links a {
             color: white;
             text-decoration: none;
             font-weight: 600;
+            font-size: 1.1rem;
             transition: var(--transition);
+            border-bottom: 2px solid transparent;
+            padding-bottom: 5px;
         }
 
         .contact-links a:hover {
-            color: var(--primary-color);
+            color: #c7d2fe;
+            border-bottom: 2px solid var(--primary-color);
         }
 
         /* Responsive Design */
@@ -228,7 +336,10 @@
             .hero {
                 flex-direction: column-reverse;
                 text-align: center;
-                padding-top: 100px;
+                padding-top: 120px;
+            }
+            .hero-content {
+                padding-left: 0;
             }
             .hero p {
                 margin: 0 auto 2rem auto;
@@ -240,10 +351,19 @@
                 margin: 0 0.5rem;
                 font-size: 0.9rem;
             }
+            body {
+                cursor: auto; /* Revert cursor on mobile */
+            }
+            .cursor-dot, .cursor-outline {
+                display: none; /* Hide custom cursor on mobile */
+            }
         }
     </style>
 </head>
 <body>
+
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-outline" id="cursor-outline"></div>
 
     <nav>
         <a href="#about">About</a>
@@ -252,93 +372,106 @@
         <a href="#skills">Skills</a>
     </nav>
 
-    <div class="container">
-        
+    <main>
         <section id="about" class="hero">
             <div class="hero-content">
                 <h1>Pooja Gopan</h1>
                 <h2>Full-Stack Software Engineer</h2>
                 <p>Dedicated to building impactful digital solutions. With over two years of experience in frontend and backend development, I specialize in creating scalable applications for local governance bodies, helping to modernize infrastructure for Panchayats and Municipalities.</p>
-                <a href="#contact" style="background: var(--primary-color); color: white; padding: 0.8rem 2rem; text-decoration: none; border-radius: 8px; font-weight: 600; display: inline-block; transition: all 0.3s ease;">Get in Touch</a>
+                <a href="#contact" class="btn">Get in Touch</a>
             </div>
             <div class="hero-image-container">
-                <img src="pooja.png" alt="Pooja Gopan Profile Picture" class="hero-image" onerror="this.src='https://via.placeholder.com/300/4f46e5/ffffff?text=Add+profile.jpg'">
+                <img src="pooja.png" alt="Pooja Gopan Profile Picture" class="hero-image" onerror="this.src='https://via.placeholder.com/320/4f46e5/ffffff?text=Upload+pooja.png'">
             </div>
         </section>
 
-        <section id="experience">
-            <h2 class="section-title">Professional Experience</h2>
-            <div class="grid">
-                <div class="card">
-                    <h3>Software Engineer</h3>
-                    <p class="meta">Grameena Patana Kendram | 2024 - Present</p>
-                    <p>Designed, developed, and maintained web and mobile applications for Local Self Government projects. Architected full-stack solutions using HTML, PHP, JavaScript, Flutter, PostgreSQL, and MySQL, ensuring robust software functionality through rigorous testing and debugging.</p>
+        <div class="container">
+            
+            <section id="experience">
+                <h2 class="section-title">Professional Experience</h2>
+                <div class="grid">
+                    <div class="card">
+                        <h3>Software Engineer</h3>
+                        <span class="meta">Grameena Patana Kendram | 2024 - Present</span>
+                        <p>Designed, developed, and maintained web and mobile applications for Local Self Government projects. Architected full-stack solutions using HTML, PHP, JavaScript, Flutter, PostgreSQL, and MySQL, ensuring robust software functionality through rigorous testing and debugging.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Trainee Software Engineer</h3>
+                        <span class="meta">Socius Innovative Global Brains | 2023</span>
+                        <p>Collaborated closely with the development team on website and application projects, actively participating in full-stack development cycles and gaining hands-on industry experience.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Java Development Intern</h3>
+                        <span class="meta">Kompetenzen Technologies | 1 Week</span>
+                        <p>Completed an intensive internship program focused on core Java development principles and application architecture.</p>
+                    </div>
                 </div>
-                <div class="card">
-                    <h3>Trainee Software Engineer</h3>
-                    <p class="meta">Socius Innovative Global Brains | 2023</p>
-                    <p>Collaborated closely with the development team on website and application projects, actively participating in full-stack development cycles and gaining hands-on industry experience.</p>
-                </div>
-                <div class="card">
-                    <h3>Java Development Intern</h3>
-                    <p class="meta">Kompetenzen Technologies | 1 Week</p>
-                    <p>Completed an intensive internship program focused on core Java development principles and application architecture.</p>
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <section id="projects">
-            <h2 class="section-title">Key Projects</h2>
-            <div class="grid">
-                <div class="card">
-                    <h3>Waste Management System (WMS)</h3>
-                    <p class="meta">Flutter • PHP • MySQL</p>
-                    <p>Developed a comprehensive Flutter-based waste management application. Built an integrated PHP backend with a MySQL database and a web administration portal designed specifically for Local Self Government institutions.</p>
+            <section id="projects">
+                <h2 class="section-title">Key Projects</h2>
+                <div class="grid">
+                    <div class="card project-card">
+                        <img src="wms1.jpeg" alt="WMS Dashboard Screenshot" class="project-img">
+                        <div class="project-content">
+                            <h3>Waste Management System</h3>
+                            <span class="meta">Flutter • PHP • MySQL</span>
+                            <p>Developed a comprehensive Flutter-based waste management application. Built an integrated PHP backend with a MySQL database and a web administration portal designed specifically for Local Self Government institutions.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card project-card">
+                        <img src="velicham.jpeg" alt="Velicham Mobile App Screenshot" class="project-img">
+                        <div class="project-content">
+                            <h3>Velicham</h3>
+                            <span class="meta">Flutter • PHP • PostgreSQL</span>
+                            <p>Engineered a robust Streetlight Management System. This platform allows for monitoring and grievance management tailored for contractors, ward members, and the public, backed by a web-based administration dashboard.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card project-card">
+                        <img src="gpk.jpeg">
+                        <div class="project-content">
+                            <h3>GPK Collect</h3>
+                            <span class="meta">Flutter • PHP • MySQL</span>
+                            <p>Built a scalable Survey Management System inspired by KoboToolbox. The application streamlines the collection of critical data including buildings, roads, water sources, government assets, and streetlight infrastructure.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="card">
-                    <h3>Velicham</h3>
-                    <p class="meta">Flutter • PHP • PostgreSQL</p>
-                    <p>Engineered a robust Streetlight Management System. This platform allows for monitoring and grievance management tailored for contractors, ward members, and the public, backed by a web-based administration dashboard.</p>
-                </div>
-                <div class="card">
-                    <h3>GPK Collect</h3>
-                    <p class="meta">Flutter • PHP • MySQL</p>
-                    <p>Built a scalable Survey Management System inspired by KoboToolbox. The application streamlines the collection of critical data including buildings, roads, water sources, government assets, and streetlight infrastructure.</p>
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <section id="skills">
-            <h2 class="section-title">Technical Expertise</h2>
-            <div class="skills-container">
-                <div class="skill-pill">Flutter</div>
-                <div class="skill-pill">PHP</div>
-                <div class="skill-pill">JavaScript</div>
-                <div class="skill-pill">PostgreSQL</div>
-                <div class="skill-pill">MySQL</div>
-                <div class="skill-pill">HTML5 & CSS3</div>
-                <div class="skill-pill">Full-Stack Architecture</div>
-                <div class="skill-pill">Mobile App Development</div>
-            </div>
-        </section>
-
-        <section id="education">
-            <h2 class="section-title">Education</h2>
-            <div class="grid">
-                <div class="card">
-                    <h3>Diploma in Computer Engineering</h3>
-                    <p class="meta">Government Polytechnic College, Nedumangad | 2020 - 2023</p>
-                    <p>Graduated with a CGPA of 7.18.</p>
+            <section id="skills">
+                <h2 class="section-title">Technical Expertise</h2>
+                <div class="skills-container">
+                    <div class="skill-pill">Flutter</div>
+                    <div class="skill-pill">PHP</div>
+                    <div class="skill-pill">JavaScript</div>
+                    <div class="skill-pill">PostgreSQL</div>
+                    <div class="skill-pill">MySQL</div>
+                    <div class="skill-pill">HTML5 & CSS3</div>
+                    <div class="skill-pill">Full-Stack Architecture</div>
+                    <div class="skill-pill">Mobile App Development</div>
                 </div>
-                <div class="card">
-                    <h3>Higher Secondary Education</h3>
-                    <p class="meta">Govt. Girls HSS, Nedumangad | 2018 - 2020</p>
-                    <p>Graduated with an 82% Score.</p>
-                </div>
-            </div>
-        </section>
+            </section>
 
-    </div>
+            <section id="education">
+                <h2 class="section-title">Education</h2>
+                <div class="grid">
+                    <div class="card">
+                        <h3>Diploma in Computer Engineering</h3>
+                        <span class="meta">Government Polytechnic College, Nedumangad | 2020 - 2023</span>
+                        <p>Graduated with a CGPA of 7.18.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Higher Secondary Education</h3>
+                        <span class="meta">Govt. Girls HSS, Nedumangad | 2018 - 2020</span>
+                        <p>Graduated with an 82% Score.</p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
 
     <footer id="contact">
         <div class="container">
@@ -353,17 +486,50 @@
     </footer>
 
     <script>
-        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+        // --- 1. Smooth Scrolling Script ---
+        document.querySelectorAll('nav a[href^="#"], a.btn[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
-                const navHeight = document.querySelector('nav').offsetHeight;
-                const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
-                
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
+                if(target) {
+                    const navHeight = document.querySelector('nav').offsetHeight;
+                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // --- 2. Custom Cursor Script ---
+        const cursorDot = document.getElementById("cursor-dot");
+        const cursorOutline = document.getElementById("cursor-outline");
+        const links = document.querySelectorAll("a, .btn, .skill-pill, .card");
+
+        window.addEventListener("mousemove", function (e) {
+            const posX = e.clientX;
+            const posY = e.clientY;
+
+            // Move the solid dot instantly
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+
+            // Use Web Animations API for a smooth trailing effect on the outline
+            cursorOutline.animate({
+                left: `${posX}px`,
+                top: `${posY}px`
+            }, { duration: 500, fill: "forwards" });
+        });
+
+        // Add hover effect to the cursor when hovering over interactive elements
+        links.forEach(link => {
+            link.addEventListener("mouseenter", () => {
+                cursorOutline.classList.add("cursor-hover");
+            });
+            link.addEventListener("mouseleave", () => {
+                cursorOutline.classList.remove("cursor-hover");
             });
         });
     </script>
